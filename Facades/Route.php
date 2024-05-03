@@ -1,4 +1,6 @@
 <?php
+
+require_once __DIR__ . '/../app/Http/Middleware/Authenticate.php';
 class Route
 {
     private static function callController(string $path, array $request, array $action): void
@@ -6,7 +8,8 @@ class Route
         if ($path == $request['uri']) {
             $controller = new $action[0]();
             $method = $action[1];
-            echo $controller->$method($request);
+            
+            echo Authenticate::handle($request, fn () => ($controller->$method($request)));
         }
     }
     public static function get(string $path, array $request, array $action): void
