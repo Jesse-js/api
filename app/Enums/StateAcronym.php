@@ -1,6 +1,5 @@
 <?php 
 
-
 enum StateAcronym: string
 {
     case AC = 'AC';
