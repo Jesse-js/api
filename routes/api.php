@@ -1,20 +1,20 @@
 <?php 
 
-require_once './Facades/Route.php';
-require_once './app/Http/Controllers/ClienteController.php';
+require_once __DIR__ . '/../Facades/Route.php';
+require_once __DIR__ . '/../app/Http/Controllers/CustomerController.php';
 
 switch ($method) {
     case 'GET':
-        Route::get('/clientes', $request, [ClienteController::class, 'index']);
+        Route::get('/customers', $request, [CustomerController::class, 'index']);
         break;
     case 'POST':
-        Route::post('/clientes', $request, [ClienteController::class, 'store']);
+        Route::post('/customers', $request, [CustomerController::class, 'store']);
         break;
     case 'PUT':
-        Route::put('/clientes', $request, [ClienteController::class, 'update']);
+        Route::put('/customers', $request, [CustomerController::class, 'update']);
         break;
     case 'DELETE':
-        Route::delete('/clientes', $request, [ClienteController::class, 'destroy']);
+        Route::delete('/customers', $request, [CustomerController::class, 'destroy']);
         break;
     default:
         Route::handleError($request);

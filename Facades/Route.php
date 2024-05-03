@@ -6,7 +6,7 @@ class Route
         if ($path == $request['uri']) {
             $controller = new $action[0]();
             $method = $action[1];
-            $controller->$method($request);
+            echo $controller->$method($request);
         }
     }
     public static function get(string $path, array $request, array $action): void
