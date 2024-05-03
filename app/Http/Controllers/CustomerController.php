@@ -13,10 +13,11 @@ class CustomerController
 
     public function store(array $request)
     {
-        //var_dump($request);
         $result = CustomerRequest::validate($request);
-        var_dump($result);
-
+        
+        if (!$result['isValid']) {
+            return Response::json(406, 'Bad Request', $result['errors']);
+        }
         return "Criar Clientes";
     }
 
