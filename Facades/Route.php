@@ -6,6 +6,7 @@ class Route
     private static function callController(string $path, array $request, array $action): void
     {
         if ($path == $request['uri']) {
+            $request['body'] = (array) $request['body'];
             $controller = new $action[0]();
             $method = $action[1];
             

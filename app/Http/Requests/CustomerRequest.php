@@ -7,7 +7,7 @@ class CustomerRequest
 {
     public static function validate(array $request): array
     {
-        $data = (array) $request['body'];
+        $data = $request['body'];
         $isValid = true;
         $errors = [];
 

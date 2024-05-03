@@ -2,7 +2,7 @@
 
 class Response
 {
-    public static function json(int $code, string $message, ?array $data): string
+    public static function json(int $code, string $message, ?array $data = null): string
     {
         $response = [
             'code' => $code,

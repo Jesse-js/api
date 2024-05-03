@@ -32,11 +32,59 @@ class Customer
     {
         $db = new Database();
         $conn = $db->getConnection();
-        $query = "INSERT INTO customers (name, email, phone) VALUES (:name, :email, :phone)";
-        $result =   $conn->prepare($query);
+        $query = "INSERT INTO customers (
+            name,
+            gender,
+            date_of_birth,
+            state,
+            city,
+            street,
+            number,
+            zip_code,
+            email,
+            telephone,
+            document_number,
+            document_type,
+            status,
+            comments,
+            username,
+            password
+        )
+        VALUES (
+                :name,
+                :gender,
+                :date_of_birth,
+                :state,
+                :city,
+                :street,
+                :number,
+                :zip_code,
+                :email,
+                :telephone,
+                :document_number,
+                :document_type,
+                :status,
+                :comments,
+                :username,
+                :password
+            )";
+        $result = $conn->prepare($query);
         $result->bindParam(':name', $data['name']);
+        $result->bindParam(':gender', $data['gender']);
+        $result->bindParam(':date_of_birth', $data['date_of_birth']);
+        $result->bindParam(':state', $data['state']);
+        $result->bindParam(':city', $data['city']);
+        $result->bindParam(':street', $data['street']);
+        $result->bindParam(':number', $data['number']);
+        $result->bindParam(':zip_code', $data['zip_code']);
         $result->bindParam(':email', $data['email']);
-        $result->bindParam(':phone', $data['phone']);
+        $result->bindParam(':telephone', $data['telephone']);
+        $result->bindParam(':document_number', $data['document_number']);
+        $result->bindParam(':document_type', $data['document_type']);
+        $result->bindParam(':status', $data['status']);
+        $result->bindParam(':comments', $data['comments']);
+        $result->bindParam(':username', $data['username']);
+        $result->bindParam(':password', $data['password']);
         $result->execute();
         return $conn->lastInsertId();
     }
