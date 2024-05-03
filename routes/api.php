@@ -1,22 +1,15 @@
-<?php 
+<?php
 
 require_once __DIR__ . '/../Facades/Route.php';
 require_once __DIR__ . '/../app/Http/Controllers/CustomerController.php';
 
-switch ($method) {
-    case 'GET':
-        Route::get('/customers', $request, [CustomerController::class, 'index']);
-        break;
-    case 'POST':
-        Route::post('/customers', $request, [CustomerController::class, 'store']);
-        break;
-    case 'PUT':
-        Route::put('/customers', $request, [CustomerController::class, 'update']);
-        break;
-    case 'DELETE':
-        Route::delete('/customers', $request, [CustomerController::class, 'destroy']);
-        break;
-    default:
-        Route::handleError($request);
-        break;
-}
+Route::setDefinition($method, $route, $request);
+
+
+Route::get('/customers', [CustomerController::class, 'index']);
+Route::get('/customers/{id}', [CustomerController::class, 'find']);
+Route::post('/customers', [CustomerController::class, 'store']);
+Route::put('/customers/{id}', [CustomerController::class, 'update']);
+Route::delete('/customers/{id}', [CustomerController::class, 'destroy']);
+
+Route::fallback();

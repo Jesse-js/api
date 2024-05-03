@@ -9,8 +9,7 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 $method = $_SERVER['REQUEST_METHOD'];
 $headers = getallheaders();
 $authorizationToken = $headers['HTTP_AUTHORIZATION_TOKEN'] ?? null;
-$route = trim('/' . $_GET['path']); //[explode('/', trim($_GET['path'], '/'))];
-
+$route = trim('/' . $_GET['path']); 
 
 $request = [
     'uri' => $route,
