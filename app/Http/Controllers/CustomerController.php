@@ -1,10 +1,14 @@
 <?php 
 
+require_once __DIR__ . '/../../Models/Customer.php';
+require_once __DIR__ . '/../../../Facades/Response.php';
 class CustomerController
 {
     public function index(array $request)
     {
-        return "Listar Clientes";
+        $result = Customer::all();
+
+        return Response::json(200, 'Customers list', $result);
     }
 
     public function store(array $request)
