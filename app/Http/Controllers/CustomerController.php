@@ -11,9 +11,15 @@ class CustomerController
     {
         try {
             $result = Customer::all();
-            
+
             if (!$result)
                 return Response::json(200, 'The customers list is empty', ['data' => []]);
+
+            foreach ($result as $key => $customer) {
+                $result[$key]['date_of_birth'] = Formatter::getBrazilianDate(
+                    $customer['date_of_birth']
+                );
+            }
 
             return Response::json(200, 'Customers list', $result);
         } catch (\Throwable $th) {
@@ -43,9 +49,15 @@ class CustomerController
     {
         try {
             $result = Customer::find($id);
-            
+
             if (!$result)
                 return Response::json(404, 'Customer not found');
+
+            foreach ($result as $key => $customer) {
+                $result[$key]['date_of_birth'] = Formatter::getBrazilianDate(
+                    $customer['date_of_birth']
+                );
+            }
 
             return Response::json(200, 'Customers list', $result);
         } catch (\Throwable $th) {
@@ -63,7 +75,7 @@ class CustomerController
                 return Response::json(404, 'Customer not found');
 
             $validation = CustomerRequest::validate($data);
-            
+
             if (!$validation['isValid'])
                 return Response::json(406, 'Bad Request', $validation['errors']);
 
@@ -80,7 +92,7 @@ class CustomerController
     {
         try {
             $result = Customer::find($id);
-            
+
             if (!$result)
                 return Response::json(404, 'Customer not found');
 
