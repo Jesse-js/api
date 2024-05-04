@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 require_once __DIR__ . '/../../config/database.php';
 
@@ -12,8 +12,8 @@ class Customer
         $result =   $conn->prepare($query);
         $result->execute();
         $result = $result->fetchAll(PDO::FETCH_ASSOC);
-        
-        return $result;   
+
+        return $result;
     }
 
     public static function find(int $id): array
@@ -24,8 +24,8 @@ class Customer
         $result =   $conn->prepare($query);
         $result->execute();
         $result = $result->fetchAll(PDO::FETCH_ASSOC);
-        
-        return $result;   
+
+        return $result;
     }
 
     public static function create(array $data): int
@@ -69,6 +69,7 @@ class Customer
                 :password
             )";
         $result = $conn->prepare($query);
+
         $result->bindParam(':name', $data['name']);
         $result->bindParam(':gender', $data['gender']);
         $result->bindParam(':date_of_birth', $data['date_of_birth']);
@@ -85,6 +86,7 @@ class Customer
         $result->bindParam(':comments', $data['comments']);
         $result->bindParam(':username', $data['username']);
         $result->bindParam(':password', $data['password']);
+
         $result->execute();
         return $conn->lastInsertId();
     }
@@ -93,13 +95,46 @@ class Customer
     {
         $db = new Database();
         $conn = $db->getConnection();
-        $query = "UPDATE customers SET name = :name, email = :email, phone = :phone WHERE id = $id";
-        $result =   $conn->prepare($query);
+        $query = "UPDATE customers
+            SET
+                name = :name,
+                gender = :gender,
+                date_of_birth = :date_of_birth,
+                state = :state,
+                city = :city,
+                street = :street,
+                number = :number,
+                zip_code = :zip_code,
+                email = :email,
+                telephone = :telephone,
+                document_number = :document_number,
+                document_type = :document_type,
+                status = :status,
+                comments = :comments,
+                username = :username,
+                password = :password
+            WHERE id = $id";
+        $result = $conn->prepare($query);
+
         $result->bindParam(':name', $data['name']);
+        $result->bindParam(':gender', $data['gender']);
+        $result->bindParam(':date_of_birth', $data['date_of_birth']);
+        $result->bindParam(':state', $data['state']);
+        $result->bindParam(':city', $data['city']);
+        $result->bindParam(':street', $data['street']);
+        $result->bindParam(':number', $data['number']);
+        $result->bindParam(':zip_code', $data['zip_code']);
         $result->bindParam(':email', $data['email']);
-        $result->bindParam(':phone', $data['phone']);
+        $result->bindParam(':telephone', $data['telephone']);
+        $result->bindParam(':document_number', $data['document_number']);
+        $result->bindParam(':document_type', $data['document_type']);
+        $result->bindParam(':status', $data['status']);
+        $result->bindParam(':comments', $data['comments']);
+        $result->bindParam(':username', $data['username']);
+        $result->bindParam(':password', $data['password']);
+
         $result->execute();
-        return $conn->lastInsertId();
+        return $id;
     }
 
     public static function delete(int $id): int
@@ -109,6 +144,6 @@ class Customer
         $query = "DELETE FROM customers WHERE id = $id";
         $result = $conn->prepare($query);
         $result->execute();
-        return $conn->lastInsertId();
+        return $id;
     }
 }

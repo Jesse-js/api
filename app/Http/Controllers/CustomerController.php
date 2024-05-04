@@ -3,12 +3,18 @@
 require_once __DIR__ . '/../../Models/Customer.php';
 require_once __DIR__ . '/../../../Facades/Response.php';
 require_once __DIR__ . '/../Requests/CustomerRequest.php';
+require_once __DIR__ . '/../../Utils/Formatter.php';
+
 class CustomerController
 {
     public function index(array $request)
     {
         try {
             $result = Customer::all();
+            
+            if (!$result)
+                return Response::json(200, 'The customers list is empty', ['data' => []]);
+
             return Response::json(200, 'Customers list', $result);
         } catch (\Throwable $th) {
             return Response::json(500, 'Internal Server Error', [$th->getMessage()]);
@@ -18,32 +24,70 @@ class CustomerController
     public function store(array $request)
     {
         try {
-            $result = CustomerRequest::validate($request);
+            $data = $request['body'];
+            $validation = CustomerRequest::validate($data);
 
-            if (!$result['isValid'])
-                return Response::json(406, 'Bad Request', $result['errors']);
+            if (!$validation['isValid'])
+                return Response::json(406, 'Bad Request', $validation['errors']);
 
-            $request['body']['date_of_birth'] = date('Y-m-d', strtotime($request['body']['date_of_birth']));
+            $data['date_of_birth'] = Formatter::getUniversalDate($data['date_of_birth']);
 
-            $customerId = Customer::create((array) $request['body']);
+            $customerId = Customer::create($data);
             return Response::json(201, 'Customer created', ['customer_id' => $customerId]);
         } catch (\Throwable $th) {
             return Response::json(500, 'Internal Server Error', [$th->getMessage()]);
         }
     }
 
-    public function show(array $request)
+    public function show(int $id, array $request)
     {
-        return "Visualizar Clientes";
+        try {
+            $result = Customer::find($id);
+            
+            if (!$result)
+                return Response::json(404, 'Customer not found');
+
+            return Response::json(200, 'Customers list', $result);
+        } catch (\Throwable $th) {
+            return Response::json(500, 'Internal Server Error', [$th->getMessage()]);
+        }
     }
 
-    public function update(array $request)
+    public function update(int $id, array $request)
     {
-        return "Editar Clientes";
+        try {
+            $data = $request['body'];
+
+            $result = Customer::find($id);
+            if (!$result)
+                return Response::json(404, 'Customer not found');
+
+            $validation = CustomerRequest::validate($data);
+            
+            if (!$validation['isValid'])
+                return Response::json(406, 'Bad Request', $validation['errors']);
+
+            $data['date_of_birth'] = Formatter::getUniversalDate($data['date_of_birth']);
+
+            $customerId = Customer::update($id, $data);
+            return Response::json(200, 'Customer updated', ['customer_id' => $customerId]);
+        } catch (\Throwable $th) {
+            return Response::json(500, 'Internal Server Error', [$th->getMessage()]);
+        }
     }
 
-    public function destroy(array $request)
+    public function destroy(int $id, array $request)
     {
-        return "Excluir Clientes";
+        try {
+            $result = Customer::find($id);
+            
+            if (!$result)
+                return Response::json(404, 'Customer not found');
+
+            $customerId = Customer::delete($id);
+            return Response::json(200, 'Customer deleted', ['customer_id' => $customerId]);
+        } catch (\Throwable $th) {
+            return Response::json(500, 'Internal Server Error', [$th->getMessage()]);
+        }
     }
 }

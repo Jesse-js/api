@@ -5,9 +5,8 @@ require_once __DIR__ . '/../../Enums/CustomerStatus.php';
 
 class CustomerRequest
 {
-    public static function validate(array $request): array
+    public static function validate(array $data): array
     {
-        $data = $request['body'];
         $isValid = true;
         $errors = [];
 
