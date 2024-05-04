@@ -2,6 +2,6 @@
 const DB_HOST = 'localhost';
 const DB_NAME = 'demo';
 const DB_USER = 'root';
-const DB_PASSWORD = '';
+const DB_PASSWORD = 'password';
 
-const AUTHORIZATION_TOKEN = 'E913F01EDC850D266FDC15978762E7F3E312726C436E3F6C96233B13CEC16C08';
+const AUTHORIZATION_TOKEN = 'token';

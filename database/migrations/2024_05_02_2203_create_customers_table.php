@@ -16,7 +16,7 @@ class CreateCustomersTable extends Migration
             `city` varchar(100) NOT NULL,
             `street` varchar(150) NOT NULL,
             `number` varchar(10) NOT NULL,
-            `zip_code` varchar(8) NOT NULL,
+            `zip_code` varchar(9) NOT NULL,
             `email` varchar(150) NOT NULL UNIQUE,
             `telephone` varchar(20) NOT NULL,
             `document_number` varchar(20) NOT NULL UNIQUE,

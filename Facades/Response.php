@@ -9,8 +9,10 @@ class Response
             'message' => $message,
         ];
 
-        if ($data) 
-            $response['data'] = $data;
+        if ($data) {
+            if ($code < 300) $response['data'] = $data;
+            else $response['errors'] = $data;
+        }
         
         return json_encode($response);
     }
