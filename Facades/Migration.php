@@ -1,8 +1,9 @@
-<?php 
+<?php
 
 require_once __DIR__ . '/../config/database.php';
 
-class Migration {
+class Migration
+{
     protected $db;
     protected $conn;
     public function __construct()

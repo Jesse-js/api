@@ -6,6 +6,7 @@ class CreateCustomersTable extends Migration
 {
     public function up(): void
     {
+        echo "Migrating: " . basename(__FILE__) . "\n";
         $sql = "CREATE TABLE IF NOT EXISTS `customers` (
             `id` int(11) NOT NULL AUTO_INCREMENT,
             `name` varchar(200) NOT NULL,
@@ -28,12 +29,15 @@ class CreateCustomersTable extends Migration
             `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
             PRIMARY KEY (`id`)
         )";
-
         $this->conn->exec($sql);
+
+        echo "Migrated: " . basename(__FILE__) . "\n";
     }
 
     public function down(): void
     {
+        echo "Rolling back: " . basename(__FILE__) . "\n";
         $this->conn->exec("DROP TABLE IF EXISTS `customers`");
+        echo "Rolled back: " . basename(__FILE__) . "\n";
     }
 }
