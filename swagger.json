@@ -409,7 +409,7 @@
             },
             "date_of_birth": {
               "type": "string",
-              "example": "Date of birth is required"
+              "example": "Date of birth is not valid, must be in the format dd/mm/yyyy"
             },
             "state": {
               "type": "string",
