@@ -212,7 +212,6 @@
               "$ref": "#/definitions/errorResponse"
             }
           }
-
         },
         "security": [
           {
@@ -348,7 +347,6 @@
             }
           }
         }
-
       }
     },
     "unauthorizedResponse": {
@@ -404,6 +402,65 @@
             "name": {
               "type": "string",
               "example": "Name is required"
+            },
+            "gender": {
+              "type": "string",
+              "example": "Gender is required"
+            },
+            "date_of_birth": {
+              "type": "string",
+              "example": "Date of birth is required"
+            },
+            "state": {
+              "type": "string",
+              "example": "State is required"
+            },
+            "city": {
+              "type": "string",
+              "example": "City is required"
+            },
+            "street": {
+              "type": "string",
+              "example": "Street is required"
+            },
+            "number": {
+              "type": "string",
+              "example": "Number is required"
+            },
+            "zip_code": {
+              "type": "string",
+              "example": "Zip code is required"
+            },
+            "email": {
+              "type": "string",
+              "example": "Email is not valid email address"
+            },
+            "telephone": {
+              "type": "string",
+              "example": "Telephone must be in the format (00) 0000-0000 or (00) 0 0000-0000"
+            },
+            "document_number": {
+              "type": "string",
+              "example": "Document number is required"
+            },
+            "document_type": {
+              "type": "string",
+              "example": "Document type is required"
+            },
+            "status": {
+              "type": "string",
+              "example": "Status is not valid"
+            },
+            "username": {
+              "type": "string",
+              "example": "Username is not valid"
+            },
+            "password": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "example": "Password must have at least one special character"
+              }
             }
           }
         }
