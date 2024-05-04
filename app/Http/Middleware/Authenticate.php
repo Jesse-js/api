@@ -5,7 +5,7 @@ require_once __DIR__ . '/../../../Facades/Response.php';
 
 class Authenticate
 {
-    public static function handle(array $request, Closure $next)
+    public static function handle(array $request, Closure $next): string|Closure
     {
         $message = ['The authorization token is missing or is invalid!'];
         if(!isset($request['authorization_token'])) 
