@@ -9,6 +9,7 @@ class Migration
     public function __construct()
     {
         $this->db = new Database();
+        $this->conn = $this->db->createDatabase();
         $this->conn = $this->db->getConnection();
     }
 }

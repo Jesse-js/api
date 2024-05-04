@@ -23,4 +23,19 @@ class Database
 
         return $this->conn;
     }
+
+
+    public function createDatabase(): void
+    {
+        $this->conn = null;
+
+        try {
+            $this->conn = new PDO("mysql:host=" . $this->host . ";", $this->username, $this->password);
+            $this->conn->exec("set names utf8");
+            $this->conn->exec("CREATE DATABASE IF NOT EXISTS " . $this->db_name . ";");
+        } catch (PDOException $exception) {
+            echo "Erro de conexão: " . $exception->getMessage();
+            $this->conn = null;
+        }
+    }
 }
