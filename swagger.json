@@ -81,7 +81,7 @@
         "produces": ["application/json"],
         "responses": {
           "200": {
-            "description": "successful operation",
+            "description": "Customers list",
             "schema": {
               "$ref": "#/definitions/listResponse"
             }
@@ -125,21 +125,33 @@
         ],
         "responses": {
           "200": {
-            "description": "successful operation",
+            "description": "Customers list",
             "schema": {
-              "$ref": "#/definitions/Customer"
+              "$ref": "#/definitions/listResponse"
             }
           },
-          "400": {
-            "description": "Invalid ID supplied"
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/unauthorizedResponse"
+            }
           },
           "404": {
-            "description": "customer not found"
+            "description": "Customer not found",
+            "schema": {
+              "$ref": "#/definitions/notFoundResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/errorResponse"
+            }
           }
         },
         "security": [
           {
-            "api_key": []
+            "HTTP_AUTHORIZATION_TOKEN": []
           }
         ]
       },
@@ -152,6 +164,14 @@
         "produces": ["application/json"],
         "parameters": [
           {
+            "name": "customerId",
+            "in": "path",
+            "description": "ID of customer to return",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
             "in": "body",
             "name": "body",
             "description": "customer object that needs to be added to the store",
@@ -162,19 +182,41 @@
           }
         ],
         "responses": {
-          "400": {
-            "description": "Invalid ID supplied"
+          "200": {
+            "description": "Customer updated",
+            "schema": {
+              "$ref": "#/definitions/updateResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/unauthorizedResponse"
+            }
           },
           "404": {
-            "description": "customer not found"
+            "description": "Customer not found",
+            "schema": {
+              "$ref": "#/definitions/notFoundResponse"
+            }
           },
-          "405": {
-            "description": "Validation exception"
+          "406": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/badRequestResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/errorResponse"
+            }
           }
+
         },
         "security": [
           {
-            "customerstore_auth": ["write:customers", "read:customers"]
+            "HTTP_AUTHORIZATION_TOKEN": []
           }
         ]
       },
@@ -186,31 +228,43 @@
         "produces": ["application/json"],
         "parameters": [
           {
-            "name": "api_key",
-            "in": "header",
-            "required": false,
-            "type": "string"
-          },
-          {
             "name": "customerId",
             "in": "path",
-            "description": "customer id to delete",
+            "description": "Customer ID to delete",
             "required": true,
             "type": "integer",
             "format": "int64"
           }
         ],
         "responses": {
-          "400": {
-            "description": "Invalid ID supplied"
+          "200": {
+            "description": "Customer deleted",
+            "schema": {
+              "$ref": "#/definitions/deletionResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/unauthorizedResponse"
+            }
           },
           "404": {
-            "description": "customer not found"
+            "description": "Customer not found",
+            "schema": {
+              "$ref": "#/definitions/notFoundResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/errorResponse"
+            }
           }
         },
         "security": [
           {
-            "customerstore_auth": ["write:customers", "read:customers"]
+            "HTTP_AUTHORIZATION_TOKEN": []
           }
         ]
       }
@@ -246,6 +300,55 @@
             }
           }
         }
+      }
+    },
+    "updateResponse": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "example": 200
+        },
+        "message": {
+          "type": "string",
+          "example": "Customer updated"
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "customer_id": {
+              "type": "integer",
+              "format": "int64",
+              "example": 10
+            }
+          }
+        }
+      }
+    },
+    "deletionResponse": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "example": 200
+        },
+        "message": {
+          "type": "string",
+          "example": "Customer deleted"
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "customer_id": {
+              "type": "integer",
+              "format": "int64",
+              "example": 10
+            }
+          }
+        }
+
       }
     },
     "unauthorizedResponse": {
