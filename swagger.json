@@ -502,7 +502,7 @@
         "data": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Customer"
+            "$ref": "#/definitions/CustomerResponse"
           }
         }
       }
@@ -590,6 +590,103 @@
         "password": {
           "type": "string",
           "example": "johndoe$t3AA"
+        }
+      },
+      "xml": {
+        "name": "customer"
+      }
+    },
+    "CustomerResponse": {
+      "type": "object",
+      "required": [
+        "name",
+        "gender",
+        "date_of_birth",
+        "state",
+        "city",
+        "street",
+        "number",
+        "zip_code",
+        "email",
+        "telephone",
+        "document_number",
+        "document_type",
+        "status",
+        "username",
+        "password"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "John Doe"
+        },
+        "gender": {
+          "type": "string",
+          "example": "M"
+        },
+        "date_of_birth": {
+          "type": "string",
+          "example": "01/01/1970"
+        },
+        "state": {
+          "type": "string",
+          "example": "SP"
+        },
+        "city": {
+          "type": "string",
+          "example": "São Paulo"
+        },
+        "street": {
+          "type": "string",
+          "example": "Av. Paulista"
+        },
+        "number": {
+          "type": "string",
+          "example": "1000"
+        },
+        "zip_code": {
+          "type": "string",
+          "example": "01001-000"
+        },
+        "email": {
+          "type": "string",
+          "example": "qg8zZ@example.com"
+        },
+        "telephone": {
+          "type": "string",
+          "example": "(11) 1 1111-1111"
+        },
+        "document_number": {
+          "type": "string",
+          "example": "091.681.160-39"
+        },
+        "document_type": {
+          "type": "string",
+          "example": "CPF"
+        },
+        "status": {
+          "type": "int",
+          "example": 1
+        },
+        "comments": {
+          "type": "string",
+          "example": "some comments"
+        },
+        "username": {
+          "type": "string",
+          "example": "johndoe"
+        },
+        "password": {
+          "type": "string",
+          "example": "johndoe$t3AA"
+        },
+        "created_at": {
+          "type": "string",
+          "example": "01/10/2020"
+        },
+        "updated_at": {
+          "type": "string",
+          "example": "01/10/2020"
         }
       },
       "xml": {
