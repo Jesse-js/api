@@ -47,10 +47,10 @@ class CustomerRequest
         if (!in_array(strtoupper($data['document_type']), DocumentType::values()))
             $errors['document_type'] = 'Document type is not valid';
         
-        if ($data['document_type'] === 'cpf' && !self::validateCpf($data['document_number']))
+        if (strtoupper($data['document_type']) === DocumentType::CPF->value && !self::validateCpf($data['document_number']))
             $errors['cpf'] = 'Cpf is not valid';
 
-        if ($data['document_type'] === 'cnpj' && !self::validateCnpj($data['document_number']))
+        if (strtoupper($data['document_type']) === DocumentType::CNPJ->value && !self::validateCnpj($data['document_number']))
             $errors['cnpj'] = 'Cnpj is not valid';
 
         if (!in_array($data['status'], CustomerStatus::values()))
