@@ -19,6 +19,12 @@ class CustomerController
                 $result[$key]['date_of_birth'] = Formatter::getBrazilianDate(
                     $customer['date_of_birth']
                 );
+                $result[$key]['created_at'] = Formatter::getBrazilianDate(
+                    $customer['created_at']
+                );
+                $result[$key]['updated_at'] = Formatter::getBrazilianDate(
+                    $customer['updated_at']
+                );
             }
 
             return Response::json(200, 'Customers list', $result);
