@@ -42,9 +42,11 @@ Para instalar o projeto siga o seguinte passo a passo:
 7. Certifique-se que a porta 3000 está disponível e, posteriormente, rode o comando `npm run start` para inicializar o servidor Node para a documentação Swagger da API;
 
 8. Após, acesse o seguinte link: `http://localhost:3000/docs/`. A seguinte tela de documentação deverá ser exibida:
+
 ![Documentação Swagger](image/docs_homepage.png)
 
 9. Para testar a API poderá ser utilizada a documentação Swagger, para isso é necessário que seja definido o valor do cabeçalho `HTTP_AUTHORIZATION_TOKEN` para que as requisições sejam autenticadas pela API, esse valor deverá ser o mesmo definido na variável de ambiente `AUTHORIZATION_TOKEN`. Para definir o cabeçalho de autorização clique em **_Authorize_** e preencha o campo, conforme mostram as imagens a seguir:
+
 ![Swagger Auth](image/docs_auth.png)
 ![Swagger Token](image/docs_token.png)
 
